@@ -34,3 +34,34 @@ jobs:
 
       - name: Compile
         run: npm run compile
+
+  package-macos:
+    name: Package (macOS Intel)
+    runs-on: macos-13
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: main/.nvmrc
+          cache: npm
+          cache-dependency-path: main/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build macOS x64 app
+        run: npm run gulp -- vscode-darwin-x64
+
+      - name: Zip app bundle
+        working-directory: .
+        run: ditto -c -k --sequesterRsrc --keepParent "VSCode-darwin-x64" "HappyDev-darwin-x64.zip"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HappyDev-darwin-x64
+          path: HappyDev-darwin-x64.zip
+          retention-days: 14
