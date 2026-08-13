@@ -1,0 +1,142 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+/*
+ * The frame and severity tints come from `.chat-input-notice`. The overlap with the
+ * input below is NOT shared - it is per-surface - so it lives here.
+ */
+
+/* Hide the container when no notification is active */
+.chat-input-notification-container:not(.has-notification) {
+	display: none;
+}
+
+/* Counteract the `.interactive-input-part` `gap: 4px` so the notification attaches to the input. Add extra -6px to account for rounded corners. */
+.interactive-session .interactive-input-part > .chat-input-notification-container {
+	margin-bottom: calc(-1 * var(--vscode-spacing-size100));
+}
+
+/* Match the chat input's focus ring so the notification merges with it. */
+.interactive-session .interactive-input-part:has(.chat-input-container.focused) > .chat-input-notification-container .chat-input-notification-widget.severity-info {
+	border-color: var(--vscode-focusBorder);
+}
+
+/* Working+focused: the chat input dims its focus border; match it here. */
+.interactive-session .interactive-input-part:has(.chat-input-container.working.focused) > .chat-input-notification-container .chat-input-notification-widget.severity-info {
+	border-color: color-mix(in srgb, var(--vscode-focusBorder) 40%, transparent);
+}
+
+/* Header row: icon + title + dismiss */
+.chat-input-notification-widget .chat-input-notification-header {
+	display: flex;
+	align-items: center;
+	gap: var(--vscode-spacing-size60);
+	min-width: 0;
+}
+
+/* Severity icon. The colour comes from the severity the notice declares. */
+.chat-input-notification-widget .chat-input-notification-icon {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	color: var(--chat-input-notice-severity);
+}
+
+/*
+ * Title and description share their type and wrapping; only weight, colour and
+ * how they take space differ.
+ */
+.chat-input-notification-widget .chat-input-notification-title,
+.chat-input-notification-widget .chat-input-notification-description {
+	font-size: var(--vscode-fontSize-label1);
+	line-height: 18px;
+	min-width: 0;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	white-space: normal;
+}
+
+.chat-input-notification-widget .chat-input-notification-title {
+	font-weight: var(--vscode-fontWeight-semiBold);
+	color: var(--vscode-foreground);
+	flex: 1;
+}
+
+/* Body row: description + actions inline */
+/* Markdown-rendered title/description: keep the text inline (no block <p> margins). */
+.chat-input-notification-widget .chat-input-notification-title-markdown,
+.chat-input-notification-widget .chat-input-notification-description-markdown {
+	display: inline;
+}
+
+.chat-input-notification-widget .chat-input-notification-title-markdown > p,
+.chat-input-notification-widget .chat-input-notification-description-markdown > p {
+	display: inline;
+	margin: 0;
+}
+
+.chat-input-notification-widget .chat-input-notification-title-markdown code,
+.chat-input-notification-widget .chat-input-notification-description-markdown code {
+	font-family: var(--monaco-monospace-font);
+	font-size: var(--vscode-fontSize-label2);
+	padding: 0 3px;
+	border-radius: 3px;
+	background: var(--vscode-textCodeBlock-background);
+}
+
+/* Body row: description + actions inline, wraps at small widths */
+.chat-input-notification-widget .chat-input-notification-body {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--vscode-spacing-size80);
+	min-width: 0;
+	padding-left: 22px; /* align with title text after the severity icon */
+}
+
+/* Description */
+.chat-input-notification-widget .chat-input-notification-description {
+	color: var(--vscode-descriptionForeground);
+	flex: 1 1 auto;
+}
+
+/* Actions container */
+.chat-input-notification-widget .chat-input-notification-actions {
+	display: flex;
+	align-items: center;
+	gap: var(--vscode-spacing-size80);
+	flex-shrink: 0;
+	margin-left: auto;
+}
+
+/* Action buttons */
+.chat-input-notification-widget .chat-input-notification-action-button {
+	font-size: var(--vscode-fontSize-label2);
+	padding: var(--vscode-spacing-size40) var(--vscode-spacing-size120);
+	min-width: unset;
+	width: auto;
+	height: 24px;
+}
+
+/* Transparent ghost style for secondary action buttons (e.g. "View Usage") */
+.chat-input-notification-widget .chat-input-notification-action-button.secondary {
+	border: none;
+	background: transparent;
+	color: var(--vscode-foreground);
+	padding: var(--vscode-spacing-size40) var(--vscode-spacing-size80);
+	opacity: 0.8;
+}
+
+.chat-input-notification-widget .chat-input-notification-action-button.secondary:hover {
+	background: var(--vscode-toolbar-hoverBackground);
+	opacity: 1;
+}
+
+/* Dismiss + mute icon buttons are styled by `.chat-input-notice-action`. */
+
+/* Cascade styling — remove top border-radius from sibling containers when notification is visible */
+.interactive-session .interactive-input-part > .chat-input-notification-container.has-notification + .chat-todo-list-widget-container .chat-todo-list-widget {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
