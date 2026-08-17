@@ -63,6 +63,9 @@
     "tab.inactiveForeground": "#5A5A5A",
     "tab.border": "#1A1A1A",
     "tab.unfocusedActiveBorderTop": "#1A1A1A",
+    "tab.hoverBackground": "#151515",
+    "tab.activeModifiedBorder": "#E63979",
+    "toolbar.hoverBackground": "#FFFFFF1A",
 
     "panel.background": "#0D0D0D",
     "panel.border": "#1A1A1A",
