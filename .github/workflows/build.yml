@@ -40,6 +40,8 @@ jobs:
   package-macos:
     name: Package (macOS Intel)
     runs-on: macos-14
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -69,8 +71,46 @@ jobs:
         run: ditto -c -k --sequesterRsrc --keepParent "VSCode-darwin-x64" "HappyDev-darwin-x64.zip"
 
       - name: Upload artifact
+        id: upload
         uses: actions/upload-artifact@v5
         with:
           name: HappyDev-darwin-x64
           path: HappyDev-darwin-x64.zip
           retention-days: 14
+
+      - name: Update download link on site
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        working-directory: .
+        env:
+          ARTIFACT_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ steps.upload.outputs.artifact-id }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          python3 - << 'PYEOF'
+          import os, re
+
+          path = "site/download.html"
+          content = open(path, encoding="utf-8").read()
+
+          content = re.sub(
+              r'href="https://github\.com/[^"]+/actions/runs/\d+/artifacts/\d+"',
+              f'href="{os.environ["ARTIFACT_URL"]}"',
+              content,
+          )
+          content = re.sub(
+              r"latest build: run #\d+",
+              f'latest build: run #{os.environ["RUN_ID"]}',
+              content,
+          )
+
+          open(path, "w", encoding="utf-8").write(content)
+          PYEOF
+
+          if git diff --quiet -- site/download.html; then
+            echo "No change to commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add site/download.html
+            git commit -m "Update download link to run #${RUN_ID} [skip ci]"
+            git push
+          fi
