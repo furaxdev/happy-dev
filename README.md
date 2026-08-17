@@ -13,22 +13,13 @@
 ╚═════╝  ╚══════╝   ╚═══╝
 ```
 
-Un écosystème open source pour faciliter le développement, du code à la communauté.
-
-## Roadmap
-
-1. **Un éditeur (IDE) open source** — fork de VS Code, rebrandé, thème "Zed-like" — *en cours*
-2. Un plugin Discord
-3. Un agent de dev
-4. Un plugin agent
-5. Un agent IA (local ou cloud)
-6. Un serveur Discord
+Un éditeur de code open source, fork de VS Code, avec un thème minimaliste inspiré de [Zed](https://zed.dev).
 
 ## Pourquoi ?
 
-Pour faciliter le développement (à partir de l'étape #2). Et parce qu'on en a envie.
+Pour faciliter le développement. Et parce qu'on en a envie.
 
-## #1 — L'éditeur
+## L'éditeur
 
 - **Base** : fork de [VS Code OSS](https://github.com/microsoft/vscode) (MIT)
 - **Type** : application desktop (Electron)
