@@ -2818,7 +2818,7 @@ export class AgentService extends Disposable implements IAgentService {
 		}
 		this._sideEffects.clearSessionTitleState(session.toString(), sessionChats.map(chat => chat.resource));
 		await this._whenSessionDataIdle(session);
-		// Remove the VS Code per-session data directory (metadata DB + checkpoints) to mirror the SDK-side cleanup
+		// Remove the HappyDev per-session data directory (metadata DB + checkpoints) to mirror the SDK-side cleanup
 		// performed by the provider above. No-op when the directory does not exist.
 		//
 		// Runs before the worktree is removed: subscribers of the will-delete
@@ -3644,7 +3644,7 @@ export class AgentService extends Disposable implements IAgentService {
 		}
 
 		// Adopt-on-open for a surfaced un-adopted legacy Copilot CLI session: seed its
-		// VS Code-layer metadata in place (reusing the on-disk event log) so the
+		// HappyDev-layer metadata in place (reusing the on-disk event log) so the
 		// restore below can hydrate it. A no-op for native / already-adopted sessions.
 		// Adopt when the migrate setting is on OR the session is already surfaced as
 		// adoptable — the latter so an entry the user can see in the list never

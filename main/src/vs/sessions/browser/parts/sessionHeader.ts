@@ -59,7 +59,7 @@ class SessionActivatingActionRunner extends ActionRunner {
  * The session header shown at the top of a session view. It surfaces the session
  * identity (status icon + title), a meta row (contributed workspace folder /
  * changes / pull request pills), and the session toolbars (e.g. Run, Open in
- * VS Code, New Chat).
+ * HappyDev, New Chat).
  *
  * It is intentionally decoupled from the {@link ChatCompositeBar} (the chat tab
  * strip) so the two surfaces evolve independently. The hosting view tells the

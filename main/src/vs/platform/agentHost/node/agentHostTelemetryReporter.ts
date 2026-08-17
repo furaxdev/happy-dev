@@ -60,7 +60,7 @@ export interface IAgentHostUserMessageSentEvent {
 
 export type IAgentHostUserMessageSentClassification = {
 	provider: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The provider handling the agent host session.' };
-	hostLaunchKind: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether the agent host process was launched by the VS Code main process or VS Code CLI.' };
+	hostLaunchKind: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether the agent host process was launched by the HappyDev main process or HappyDev CLI.' };
 	initiatorClientId: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The opaque AHP client identifier that initiated the user message.' };
 	initiatorClientType: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The type of AHP client that initiated the user message.' };
 	initiatorConnectionKind: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The route the initiating client declared it used to reach the agent host.' };
@@ -99,7 +99,7 @@ export interface IAgentHostClientConnectionEvent {
 
 export type IAgentHostClientConnectionClassification = {
 	action: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether an initialized AHP client transport connected or disconnected.' };
-	hostLaunchKind: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether the agent host process was launched by the VS Code main process or VS Code CLI.' };
+	hostLaunchKind: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'Whether the agent host process was launched by the HappyDev main process or HappyDev CLI.' };
 	clientId: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The opaque AHP client identifier.' };
 	clientType: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The bounded type of the connected AHP client.' };
 	clientImplementationName: { classification: 'SystemMetaData'; purpose: 'FeatureInsight'; comment: 'The implementation name declared by the AHP client.' };
@@ -207,8 +207,8 @@ export type IAgentHostTurnFailedClassification = {
 	errorCode: { classification: 'CallstackOrException'; purpose: 'PerformanceAndHealth'; comment: 'The exception or protocol error code, when available.' };
 	providerCallId: { classification: 'SystemMetaData'; purpose: 'PerformanceAndHealth'; comment: 'The GitHub provider request identifier, when available.' };
 	serviceRequestId: { classification: 'SystemMetaData'; purpose: 'PerformanceAndHealth'; comment: 'The Copilot service request identifier, when available.' };
-	msg: { classification: 'CallstackOrException'; purpose: 'PerformanceAndHealth'; comment: 'The error message. VS Code telemetry scrubs file paths and likely secrets before transmission.' };
-	callstack: { classification: 'CallstackOrException'; purpose: 'PerformanceAndHealth'; comment: 'The error stack. VS Code telemetry scrubs file paths and likely secrets before transmission.' };
+	msg: { classification: 'CallstackOrException'; purpose: 'PerformanceAndHealth'; comment: 'The error message. HappyDev telemetry scrubs file paths and likely secrets before transmission.' };
+	callstack: { classification: 'CallstackOrException'; purpose: 'PerformanceAndHealth'; comment: 'The error stack. HappyDev telemetry scrubs file paths and likely secrets before transmission.' };
 	owner: 'roblourens';
 	comment: 'Captures diagnostic details for failed agent host turns.';
 };
@@ -843,7 +843,7 @@ export class AgentHostTelemetryReporter {
 	 * The model-message counterpart to {@link userMessageText}. Emitted when an `assistant.message`
 	 * arrives (the agent host's per-model-call boundary), carrying the assistant's response text.
 	 * `headerRequestId` is filled with the model call's client-minted `x-request-id`, matching the
-	 * extension. VS Code-only enrichment dims (code-block languages/counts) are not reconstructed here.
+	 * extension. HappyDev-only enrichment dims (code-block languages/counts) are not reconstructed here.
 	 *
 	 * @param session Session URI string; its id becomes `conversationId`.
 	 * @param content The assistant's response text. No-ops when empty.
@@ -995,7 +995,7 @@ export class AgentHostTelemetryReporter {
 	 * The extension emits it from the skill/readFile tools; the agent host observes the equivalent
 	 * boundary at the SDK `skill.invoked` event, whose payload already carries the content (hashed
 	 * here, never sent raw), the discovery `source`, and the plugin identity. The extension's
-	 * `skillExtensionId` / `skillExtensionVersion` encode the contributing *VS Code extension*, which
+	 * `skillExtensionId` / `skillExtensionVersion` encode the contributing *HappyDev extension*, which
 	 * does not exist in the agent host; the AH-native provenance is the plugin, so `pluginName` /
 	 * `pluginVersion` fill those columns. No-ops when the skill name is empty.
 	 *

@@ -54,14 +54,14 @@ export interface ISessionsRecentWorkspacesService {
 	 *
 	 * Pass `false` to restrict to the sessions' own recently-picked history
 	 * only. The new-session workspace picker checks this history before
-	 * considering VS Code's recently opened folders.
+	 * considering HappyDev's recently opened folders.
 	 */
 	getRecentWorkspaces(includeVSCodeRecents?: boolean): IRecentWorkspace[];
 
 	/** Records `folderUri` as most-recently used; `checked` un-checks every other entry. */
 	addRecentWorkspace(folderUri: URI, providerId: string | undefined, checked: boolean): void;
 
-	/** Removes `folderUri` from the recent list, wherever it came from (own history or VS Code's recents). */
+	/** Removes `folderUri` from the recent list, wherever it came from (own history or HappyDev's recents). */
 	removeRecentWorkspace(folderUri: URI): void;
 
 	/** Clears the `checked` flag on every recent entry. */

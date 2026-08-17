@@ -133,7 +133,7 @@ import { detectExistingCodexChatGPTSetup } from './codexLocalAuth.js';
 
 const CLIENT_INFO = {
 	name: 'vscode_agent_host',
-	title: 'VS Code Agent Host',
+	title: 'HappyDev Agent Host',
 	// The codex `clientInfo.version` is informational. Hardcoded to a
 	// non-empty placeholder; bumping it isn't required when our code
 	// changes.
@@ -2362,11 +2362,11 @@ export class CodexAgent extends Disposable implements IAgent {
 		const ignored = [
 			'thread/started', // thread/start response is authoritative for session materialization.
 			'thread/status/changed', // Codex thread status is not surfaced in Agent Host state yet.
-			'thread/settings/updated', // VS Code owns session config; Codex settings echoes are not consumed yet.
+			'thread/settings/updated', // HappyDev owns session config; Codex settings echoes are not consumed yet.
 			'thread/goal/updated', // Goals are not surfaced in the Agent Host UI yet.
 			'thread/goal/cleared', // Goals are not surfaced in the Agent Host UI yet.
 			'thread/compacted', // Deprecated completion echo; the contextCompaction item owns UI progress.
-			'remoteControl/status/changed', // Remote-control state is not part of the VS Code integration.
+			'remoteControl/status/changed', // Remote-control state is not part of the HappyDev integration.
 			'serverRequest/resolved', // We resolve requests through JSON-RPC responses, so this echo is informational.
 			'item/autoApprovalReview/started', // Informational; the completed notification drives the denied-action card.
 		] as const;

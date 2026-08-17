@@ -499,7 +499,7 @@ export function resolveCopilotOtlpMetricsEndpoint(endpoint: string, protocol: 'h
 	}
 }
 
-/** `origin` value written by the VS Code extension-host Copilot CLI feature. */
+/** `origin` value written by the HappyDev extension-host Copilot CLI feature. */
 const EXTENSION_HOST_CLI_MARKER_ORIGIN = 'vscode';
 
 /**
@@ -1679,7 +1679,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 		const clientStarting = (async () => {
 			this._logService.info('[Copilot] Starting CopilotClient...');
 
-			// Build a clean env for the CLI subprocess, stripping Electron/VS Code vars
+			// Build a clean env for the CLI subprocess, stripping Electron/HappyDev vars
 			// that can interfere with the Node.js process the SDK spawns.
 			const env = createCopilotCliEnvironment();
 			// Family aliases are host-side (prompt and tool-profile routing) and
@@ -1705,7 +1705,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 				env['COPILOT_CLI_ENABLED_FEATURE_FLAGS'] = [...flags].join(',');
 			}
 
-			// Identify VS Code's agent host traffic in CAPI
+			// Identify HappyDev's agent host traffic in CAPI
 			env['GITHUB_COPILOT_INTEGRATION_ID'] = COPILOT_INTEGRATION_ID;
 			this._logService.info(`[Copilot] Set CLI env: GITHUB_COPILOT_INTEGRATION_ID=${COPILOT_INTEGRATION_ID}`);
 
@@ -1740,13 +1740,13 @@ export class CopilotAgent extends Disposable implements IAgent {
 			const cliPath = await resolveCopilotCliPath(nodeModulesUri);
 
 			// The SDK's sandbox auto-detection looks for `<MXC_BIN_DIR>/<arch>/wxc-exec.exe`
-			// (and the Linux/macOS equivalents). VS Code core ships the MXC sandbox binaries
+			// (and the Linux/macOS equivalents). HappyDev core ships the MXC sandbox binaries
 			// at `<nodeModules>/@microsoft/mxc-sdk/bin/<arch>/`, so point `MXC_BIN_DIR` there.
 			// The @github/copilot package's own `mxc-bin/` is excluded from the product build
 			// (see build/.moduleignore), mirroring `CopilotCLISDK.getPackage` in the extension.
 			env['MXC_BIN_DIR'] = URI.joinPath(nodeModulesUri, '@microsoft', 'mxc-sdk', 'bin').fsPath;
 
-			// Add VS Code's built-in ripgrep to PATH so the CLI subprocess can find it.
+			// Add HappyDev's built-in ripgrep to PATH so the CLI subprocess can find it.
 			const resolvedRgDiskPath = await rgDiskPath();
 			const rgDir = dirname(resolvedRgDiskPath);
 			// On Windows the env key is typically "Path" (not "PATH"). Since we copied
@@ -2613,7 +2613,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 		}
 		// Mirror the extension host's `getSessionOrigin`: honor an explicit
 		// `origin` (the GitHub Copilot app writes `other`), else guess `vscode`
-		// only when older origin-less markers carry VS Code-specific properties.
+		// only when older origin-less markers carry HappyDev-specific properties.
 		if (marker.origin !== undefined) {
 			return marker.origin === EXTENSION_HOST_CLI_MARKER_ORIGIN;
 		}
@@ -2663,7 +2663,7 @@ export class CopilotAgent extends Disposable implements IAgent {
 			// Carry over the user-chosen session name (EH `customTitle`) so the
 			// adopted session keeps its title instead of regenerating one.
 			const customTitle = await this._readExtensionHostCliCustomTitle(sessionId);
-			// Seed VS Code-layer metadata only — the SDK event log on disk is
+			// Seed HappyDev-layer metadata only — the SDK event log on disk is
 			// untouched. Writing `agentSessionData/<sanitizedId>/session.db` here
 			// is also what makes the legacy extension-host Copilot CLI list stop
 			// showing this session (it dedups against agent-host-owned session ids).

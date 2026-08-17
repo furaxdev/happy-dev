@@ -215,7 +215,7 @@ export interface ISessionRouter {
 	readonly _serviceBrand: undefined;
 
 	/**
-	 * First determine whether the utterance asks to run an available VS Code
+	 * First determine whether the utterance asks to run an available HappyDev
 	 * command. Chat intent continues to session routing.
 	 */
 	detectIntent(request: ICommandIntentRequest, token: CancellationToken): Promise<ICommandIntentResult>;
@@ -242,11 +242,11 @@ export function buildCommandIntentMessages(request: ICommandIntentRequest): ISes
 		.map((command, index) => `- candidate=c${index} title=${JSON.stringify(clip(command.label, COMMAND_INTENT_LABEL_CLIP_LENGTH))}`)
 		.join('\n');
 	const system = [
-		'Determine whether the user wants to run one available VS Code command or continue to a coding chat.',
+		'Determine whether the user wants to run one available HappyDev command or continue to a coding chat.',
 		'Choose command only for a clear application or editor action that exactly matches one listed command and needs no arguments.',
-		'An imperative directive that controls the VS Code user interface is command intent when a matching command is listed. This includes opening, closing, showing, hiding, toggling, focusing, or navigating VS Code views, panels, editors, and settings UI.',
+		'An imperative directive that controls the HappyDev user interface is command intent when a matching command is listed. This includes opening, closing, showing, hiding, toggling, focusing, or navigating HappyDev views, panels, editors, and settings UI.',
 		'For a direct match such as "toggle terminal" with a listed Toggle Terminal command, choose command with high confidence.',
-		'Changing the VS Code color theme, file icon theme, or product icon theme through a listed theme picker is command intent.',
+		'Changing the HappyDev color theme, file icon theme, or product icon theme through a listed theme picker is command intent.',
 		'Distinguish UI directives from coding tasks: "toggle terminal" is command, while "fix terminal toggling" is chat.',
 		'Questions, explanations, coding tasks, repository work, file edits, debugging, and requests that need command arguments are chat.',
 		'When uncertain, choose chat.',

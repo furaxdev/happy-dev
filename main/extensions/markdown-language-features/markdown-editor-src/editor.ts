@@ -271,7 +271,7 @@ class Editor extends Disposable {
 		host.appendChild(view.element);
 		postEditorFocus();
 
-		// Render comments as the VS Code V2 markdown cards. The card colours come
+		// Render comments as the HappyDev V2 markdown cards. The card colours come
 		// from the webview's own `--vscode-*` theme variables; `theme` only picks
 		// the light/dark token wrapper. `resolveLine` maps a comment's start offset
 		// to a 1-based line for the card header.

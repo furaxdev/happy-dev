@@ -2322,7 +2322,7 @@ export class CopilotAgentSession extends Disposable {
 	}
 
 	/**
-	 * Whether VS Code's auto-reply setting is enabled in the root config.
+	 * Whether HappyDev's auto-reply setting is enabled in the root config.
 	 */
 	private _isAutoReplyEnabled(): boolean {
 		return this._configurationService.getRootValue(platformRootSchema, AgentHostAutoReplyEnabledConfigKey) === true;

@@ -1,6 +1,6 @@
 # Local Agent Host Endpoint Discovery
 
-VS Code's local agent host exposes the Agent Host Protocol (AHP) to other
+HappyDev's local agent host exposes the Agent Host Protocol (AHP) to other
 processes running as the same user. The endpoint is a WebSocket server bound to
 a Unix domain socket on macOS/Linux or a named pipe on Windows.
 
@@ -23,7 +23,7 @@ the filename is cross-language, path-safe, and collision-resistant for the full
 entry identity. Readers enumerate the directory to discover every live local
 agent host.
 
-`<userDataPath>` is the active VS Code user data directory. Its value depends on
+`<userDataPath>` is the active HappyDev user data directory. Its value depends on
 the product quality and any `--user-data-dir` argument. Implementations
 should resolve the active user data directory rather than assuming the default
 Stable or Insiders location.
@@ -32,7 +32,7 @@ Because each process writes only its own file, there is no shared
 read-modify-write and therefore **no lock**. See
 [Multi-writer safety](#multi-writer-safety).
 
-Entries are optional. If VS Code cannot prepare or publish the external
+Entries are optional. If HappyDev cannot prepare or publish the external
 endpoint, it logs the error and continues running the agent host over its
 internal MessagePort transport.
 
@@ -72,7 +72,7 @@ differs.
 | Property | Description |
 |---|---|
 | `schemaVersion` | Metadata schema version. Clients must ignore entries whose version they do not understand rather than rejecting the whole file. |
-| `type` | Kind of process that owns the endpoint: `editor` (a VS Code utility process) or `standalone` (the `code agent host` CLI). This controls ownership/default-selection policy on the client; it is not a measure of trust. |
+| `type` | Kind of process that owns the endpoint: `editor` (a HappyDev utility process) or `standalone` (the `code agent host` CLI). This controls ownership/default-selection policy on the client; it is not a measure of trust. |
 | `pid` | PID of the process that owns the endpoint. |
 | `instanceId` | Random identity used to distinguish successive endpoint owners. Combined with `type` and `pid`, this forms the entry's identity for dedupe/removal and for naming the entry file, since PIDs can be reused after a process exits. |
 | `protocolVersion` | AHP version spoken by the host. Clients must still perform the normal AHP `initialize` negotiation. |
@@ -106,7 +106,7 @@ consistent with the "ignore unsupported schema versions" rule above.
 ## Connecting
 
 Connect to `endpoint.path` (socket endpoints) using WebSocket framing and
-provide `connectionToken` in the standard VS Code connection-token query
+provide `connectionToken` in the standard HappyDev connection-token query
 parameter:
 
 ```text
@@ -180,7 +180,7 @@ Readers never write under coordination. Each reader:
   metadata token is required to complete the WebSocket upgrade.
 - An entry file is written atomically only after the endpoint is listening and
   the protocol handler is installed.
-- On shutdown, VS Code computes its own `<identity>.json` path and removes only
+- On shutdown, HappyDev computes its own `<identity>.json` path and removes only
   that exact file. The shared `entries` directory is intentionally left in place
   to avoid racing a concurrent publisher (an `rmdir` could delete the directory
   between another writer creating it and writing its temp file). Because a

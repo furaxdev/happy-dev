@@ -50,7 +50,7 @@ const $ = DOM.$;
 
 /**
  * Card-style view of automations for the Agents window sessions grid.
- * Uses native VS Code components and styling patterns matching the
+ * Uses native HappyDev components and styling patterns matching the
  * automationsListWidget in AI Customization.
  */
 export class AutomationsCardsWidget extends Disposable {

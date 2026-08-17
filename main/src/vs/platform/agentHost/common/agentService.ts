@@ -110,7 +110,7 @@ export const AgentHostCodexMultiRootEnabledSettingId = 'chat.agentHost.codexAgen
  * a type usable without GitHub (e.g. Claude in native mode with an existing local
  * setup) works signed out while types that need GitHub prompt for it on demand.
  *
- * This is the **workbench** VS Code setting id. The workbench registers the
+ * This is the **workbench** HappyDev setting id. The workbench registers the
  * configuration schema and forwards the value into the agent-host root config
  * under the short key `AgentHostConfigKey.AllowSignedOutWhenUsable`, which the
  * Claude provider reads node-side via `getRootValue`. Until it is wired and
@@ -276,7 +276,7 @@ export function shouldSurfaceLocalAgentHostProvider(provider: AgentProvider, con
 // shape the agent host downloads on demand from `product.agentSdks.codex`).
 // The agent host spawns the native codex binary from inside that tree as a
 // long-lived child process and speaks JSON-RPC over stdio. The binary is not
-// bundled with VS Code; users either install codex themselves (typically via
+// bundled with HappyDev; users either install codex themselves (typically via
 // `npm install -g @openai/codex` or a platform package manager) or rely on
 // the on-demand download.
 
@@ -318,7 +318,7 @@ export const AgentHostCodexAgentBinaryArgsEnvVar = 'VSCODE_AGENT_HOST_CODEX_APP_
 // The `chat.agentHost.otel.*` namespace surfaces the same exporter knobs the CLI
 // runtime documents in `extensions/copilot/docs/monitoring/agent_monitoring.md`,
 // but routes them through the agent host process so the user's settings stay in
-// VS Code instead of leaking via shell env.
+// HappyDev instead of leaking via shell env.
 //
 // `chat.agentHost.otel.dbSpanExporter.enabled` switches on the in-process
 // loopback receiver + persistent SQLite span store; the other settings still
@@ -644,7 +644,7 @@ export interface IAgentHostNetworkDiagnosticsInfo {
 	readonly arch: string;
 	/** Authenticated GitHub account login, when known. */
 	readonly account?: string;
-	/** VS Code `http.*` proxy settings observed by the agent host, keyed by setting id (only those that are set). */
+	/** HappyDev `http.*` proxy settings observed by the agent host, keyed by setting id (only those that are set). */
 	readonly proxySettings: Readonly<Record<string, string>>;
 	/** Proxy-related environment variables observed by the agent host process, keyed by name (only those that are set). */
 	readonly proxyEnv: Readonly<Record<string, string>>;

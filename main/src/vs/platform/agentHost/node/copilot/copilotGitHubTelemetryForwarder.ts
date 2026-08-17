@@ -203,7 +203,7 @@ export class CopilotGitHubTelemetryForwarder {
 			}
 		}
 
-		// VS Code's TAS assignment context, scoped to forwarded Copilot CLI
+		// HappyDev's TAS assignment context, scoped to forwarded Copilot CLI
 		// events only — deliberately not a telemetry-service-wide experiment
 		// property, so Claude/Codex/host events stay unstamped.
 		const assignmentContext = this._getVSCodeAssignmentContext();

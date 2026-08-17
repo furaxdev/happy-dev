@@ -17,7 +17,7 @@ export const IAgentHostProxyResolver = createDecorator<IAgentHostProxyResolver>(
  * Node-side registry of renderer {@link IAgentHostClientProxyConnection}s keyed
  * by client id. Populated by the agent host's connection lifecycle (one entry
  * per connected renderer) and consumed by {@link CopilotAgent} to resolve the
- * CAPI proxy through VS Code's Electron session before spawning the Copilot SDK.
+ * CAPI proxy through HappyDev's Electron session before spawning the Copilot SDK.
  *
  * Proxy configuration is a property of the machine, not of a particular window,
  * so any connected renderer can serve the lookup; the resolver calls the first
@@ -32,9 +32,9 @@ export interface IAgentHostProxyResolver {
 	/**
 	 * Resolve the proxy URL for `url` (e.g. `http://host:port`), or `undefined`
 	 * for a direct connection. Reuses `@vscode/proxy-agent`'s `resolveProxyURL`
-	 * so the same precedence as the rest of VS Code applies: `http.noProxy` →
+	 * so the same precedence as the rest of HappyDev applies: `http.noProxy` →
 	 * `http.proxy` setting → `HTTP(S)_PROXY` env vars → the host proxy resolution
-	 * that runs in VS Code (Electron session) via the reverse channel.
+	 * that runs in HappyDev (Electron session) via the reverse channel.
 	 */
 	resolveProxy(url: string): Promise<string | undefined>;
 
@@ -84,7 +84,7 @@ export class AgentHostProxyResolver implements IAgentHostProxyResolver {
 			const systemCertificatesV2 = () => config<boolean>('http.experimental.systemCertificatesV2') ?? false;
 			const systemCertificates = () => !!config<boolean>('http.systemCertificates');
 			const params: ProxyAgentParams = {
-				// The host proxy resolution runs in VS Code: reverse-call a connected
+				// The host proxy resolution runs in HappyDev: reverse-call a connected
 				// renderer, whose IRequestService.resolveProxy hits the Electron
 				// session (system settings / PAC scripts).
 				resolveProxy: (url) => this._hostResolveProxy(url),

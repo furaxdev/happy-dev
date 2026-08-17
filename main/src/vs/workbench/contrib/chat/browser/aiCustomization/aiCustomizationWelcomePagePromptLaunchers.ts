@@ -446,7 +446,7 @@ export class PromptLaunchersAICustomizationWelcomePage extends Disposable implem
 		if (workspacePromptCount > 0 && userPromptCount > 0) {
 			return localize(
 				'promptMigrationCardDescriptionWorkspaceAndUser',
-				"Prompt files are deprecated for this harness. Found {0} prompt files ({1} workspace, {2} global) that local VS Code can still run, but {3} ignores. Convert them to skills to keep them available.",
+				"Prompt files are deprecated for this harness. Found {0} prompt files ({1} workspace, {2} global) that local HappyDev can still run, but {3} ignores. Convert them to skills to keep them available.",
 				totalPromptCount,
 				workspacePromptCount,
 				userPromptCount,
@@ -457,7 +457,7 @@ export class PromptLaunchersAICustomizationWelcomePage extends Disposable implem
 		if (workspacePromptCount > 0) {
 			return localize(
 				'promptMigrationCardDescriptionWorkspace',
-				"Prompt files are deprecated for this harness. Found {0} workspace prompt files that local VS Code can still run, but {1} ignores. Convert them to skills to keep them available.",
+				"Prompt files are deprecated for this harness. Found {0} workspace prompt files that local HappyDev can still run, but {1} ignores. Convert them to skills to keep them available.",
 				workspacePromptCount,
 				this.harnessLabel,
 			);
@@ -465,7 +465,7 @@ export class PromptLaunchersAICustomizationWelcomePage extends Disposable implem
 
 		return localize(
 			'promptMigrationCardDescriptionUser',
-			"Prompt files are deprecated for this harness. Found {0} global prompt files that local VS Code can still run, but {1} ignores. Convert them to skills to keep them available.",
+			"Prompt files are deprecated for this harness. Found {0} global prompt files that local HappyDev can still run, but {1} ignores. Convert them to skills to keep them available.",
 			userPromptCount,
 			this.harnessLabel,
 		);

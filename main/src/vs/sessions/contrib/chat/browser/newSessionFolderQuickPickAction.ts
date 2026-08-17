@@ -25,7 +25,7 @@ export interface IFolderQuickPickItem extends IQuickPickItem {
 	readonly browse?: boolean;
 }
 
-/** Builds the flat folder quick pick list: own recents, then VS Code recents (deduplicated), then Browse. */
+/** Builds the flat folder quick pick list: own recents, then HappyDev recents (deduplicated), then Browse. */
 export function buildFolderQuickPickItems(
 	recentWorkspacesService: ISessionsRecentWorkspacesService,
 	labelService: ILabelService,

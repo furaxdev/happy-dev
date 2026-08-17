@@ -72,7 +72,7 @@ export function shouldShowAccountPanelSummary(state: Pick<IAccountTitleBarState,
 	return !hasCopilotDashboard && !isAccountLoading && !(state.source === 'copilot' && state.kind === 'prominent');
 }
 
-// Register the shared VS Code update entry at the trailing edge of the Agents titlebar.
+// Register the shared HappyDev update entry at the trailing edge of the Agents titlebar.
 registerUpdateTitleBarMenuPlacement(Menus.TitleBarUpdate, {
 	when: ContextKeyExpr.and(IsAuxiliaryWindowContext.toNegated(), SessionsWelcomeVisibleContext.toNegated()),
 });

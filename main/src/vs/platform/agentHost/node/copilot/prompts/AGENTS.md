@@ -101,7 +101,7 @@ non-core client tools behind the runtime's `tool_search_tool`:
   `defer: 'never'` if it is in `NON_DEFERRED_CLIENT_TOOL_NAMES`
   (`runTests`, `rename`, `usages`), else `defer: 'auto'`. Built-in runtime tools
   are never deferred. The renderer (`agentHostSessionHandler._setupClientToolCall`)
-  maps `tool_search_tool` back to `toolSearch` to execute the real VS Code tool.
+  maps `tool_search_tool` back to `toolSearch` to execute the real HappyDev tool.
 - **The prompt** (this folder): `toolSearchInstructionLines(toolSearchActive)`
   adds a `tool_instructions` line (`toolSearchToolInstructions`) telling the
   model to load deferred tools via `tool_search_tool` first — gated on
@@ -115,7 +115,7 @@ tool-count gate (1 ⇒ always active), while each tool's `defer` flag decides
 whether *that* tool is deferred.
 
 This B-inject bridge is intentionally interim. A follow-up moves tool-search
-registration and ranking into VS Code core so Agent Host no longer depends on
+registration and ranking into HappyDev core so Agent Host no longer depends on
 the Copilot extension's tool implementation or embeddings plumbing.
 
 ## Lever 2 — per-model contributor (`promptRegistry.ts` + `allPrompts.ts`)

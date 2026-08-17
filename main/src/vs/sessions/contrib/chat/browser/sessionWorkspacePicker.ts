@@ -262,7 +262,7 @@ export class WorkspacePicker extends Disposable {
 			this._restoreAutomaticSelection();
 		}));
 
-		// VS Code's recent-workspace history is loaded asynchronously.
+		// HappyDev's recent-workspace history is loaded asynchronously.
 		this._register(this.recentWorkspacesService.onDidChangeRecentWorkspaces(() => {
 			this._restoreAutomaticSelection();
 		}));
@@ -812,7 +812,7 @@ export class WorkspacePicker extends Disposable {
 	 * Builds the picker items list from recent workspaces.
 	 *
 	 * Items are shown in a flat recency-sorted list (most recently used first)
-	 * without source grouping. Own recents come first, followed by VS Code
+	 * without source grouping. Own recents come first, followed by HappyDev
 	 * recent folders.
 	 */
 	protected _buildItems(): IActionListItem<IWorkspacePickerItem>[] {
@@ -827,7 +827,7 @@ export class WorkspacePicker extends Disposable {
 		const tabFilter = this._isTabFiltered()
 			? (w: IResolvedFolderWorkspace) => w.workspace.group === this._activeTab
 			: undefined;
-		// Own recents first, then VS Code recents (merged and deduplicated by the service)
+		// Own recents first, then HappyDev recents (merged and deduplicated by the service)
 		const recentWorkspaces = workspaceGroupAction?.hideWorkspaceItems
 			? []
 			: this._getRecentWorkspaces()
@@ -1067,7 +1067,7 @@ export class WorkspacePicker extends Disposable {
 			};
 		}
 
-		// Agents-owned recents are ordered before VS Code's general recents.
+		// Agents-owned recents are ordered before HappyDev's general recents.
 		try {
 			for (const recent of this.recentWorkspacesService.getRecentWorkspaces()) {
 				const folderUri = recent.workspace.folders[0]?.root;

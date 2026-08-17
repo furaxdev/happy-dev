@@ -248,7 +248,7 @@ export class AgentHostContribution extends Disposable implements IWorkbenchContr
 
 		// Chat session contribution.
 		// Keep the delegation picker available for local agent host sessions in
-		// both VS Code and the Agents app so users can hand off (continue) their
+		// both HappyDev and the Agents app so users can hand off (continue) their
 		// conversation to any other agent host session or remote target.
 		store.add(this._chatSessionsService.registerChatSessionContribution({
 			type: sessionType,
@@ -352,7 +352,7 @@ export class AgentHostContribution extends Disposable implements IWorkbenchContr
 
 	/**
 	 * Authenticate using protectedResources from agent info in root state.
-	 * Resolves tokens via the standard VS Code authentication service.
+	 * Resolves tokens via the standard HappyDev authentication service.
 	 */
 	private async _authenticateWithServer(agents: readonly AgentInfo[]): Promise<void> {
 		const isInitialAuthentication = agents.length > 0 && !this._didStartInitialAuthentication;

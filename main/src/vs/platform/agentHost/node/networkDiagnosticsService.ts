@@ -46,7 +46,7 @@ const MAX_BODY_CHARS = 64 * 1024;
  */
 const PROXY_ENV_KEYS = ['HTTPS_PROXY', 'https_proxy', 'HTTP_PROXY', 'http_proxy', 'ALL_PROXY', 'all_proxy', 'NO_PROXY', 'no_proxy'] as const;
 
-/** VS Code `http.*` proxy settings surfaced alongside the env vars. */
+/** HappyDev `http.*` proxy settings surfaced alongside the env vars. */
 const PROXY_CONFIG_KEYS = ['http.proxy', 'http.proxyStrictSSL', 'http.proxySupport', 'http.noProxy'] as const;
 
 export class NetworkDiagnosticsService implements INetworkDiagnosticsService {
@@ -94,7 +94,7 @@ export class NetworkDiagnosticsService implements INetworkDiagnosticsService {
 	 * Probe connectivity from the agent host process to a single `url`. Resolves
 	 * the proxy (for reporting), performs an IPv4 DNS lookup, and then a
 	 * reachability request through {@link IRequestService} — so the probe
-	 * traverses the same proxy / TLS / certificate stack the rest of VS Code
+	 * traverses the same proxy / TLS / certificate stack the rest of HappyDev
 	 * uses. Each step is individually timed and never throws; failures are
 	 * captured on the result.
 	 */
@@ -122,8 +122,8 @@ export class NetworkDiagnosticsService implements INetworkDiagnosticsService {
 			dnsIpv4, dnsIpv6,
 		};
 
-		// Reachability: a GET through IRequestService, which applies VS Code's proxy,
-		// strictSSL, and certificate handling — the path the rest of VS Code uses.
+		// Reachability: a GET through IRequestService, which applies HappyDev's proxy,
+		// strictSSL, and certificate handling — the path the rest of HappyDev uses.
 		const probeStart = Date.now();
 		try {
 			const context = await this._requestService.request({

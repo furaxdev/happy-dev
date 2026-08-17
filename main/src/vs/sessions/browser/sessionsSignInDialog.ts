@@ -26,7 +26,7 @@ export function createSessionsSignInDialogOptions(commandService: ICommandServic
 		dialogExtraClasses: ['sessions-welcome-dialog'],
 		renderDialogFooter: showReturnToVSCodeEditor ? (footer: HTMLElement) => createDialogAction(
 			footer,
-			localize('sessions.returnToVSCodeEditor', "Return to VS Code Editor"),
+			localize('sessions.returnToVSCodeEditor', "Return to HappyDev Editor"),
 			() => {
 				void commandService.executeCommand<void>(RETURN_TO_VSCODE_EDITOR_COMMAND_ID).catch(onUnexpectedError);
 			}
