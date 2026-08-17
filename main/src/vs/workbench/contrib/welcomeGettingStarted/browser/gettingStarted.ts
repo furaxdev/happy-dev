@@ -924,8 +924,21 @@ export class GettingStartedPage extends EditorPane {
 		}));
 
 		const header = $('.header', {},
-			$('h1.product-name.caption', {}, this.productService.nameLong),
-			$('p.subtitle.description', {}, localize({ key: 'gettingStarted.editingEvolved', comment: ['Shown as subtitle on the Welcome page.'] }, "Editing evolved"))
+			$('pre.happydev-banner', {}, [
+				'██╗  ██╗  █████╗  ██████╗  ██████╗  ██╗   ██╗  ',
+				'██║  ██║ ██╔══██╗ ██╔══██╗ ██╔══██╗ ╚██╗ ██╔╝',
+				'███████║ ███████║ ██████╔╝ ██████╔╝  ╚████╔╝ ',
+				'██╔══██║ ██╔══██║ ██╔═══╝  ██╔═══╝    ╚██╔╝  ',
+				'██║  ██║ ██║  ██║ ██║      ██║         ██║   ',
+				'╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝      ╚═╝         ╚═╝   ',
+				'██████╗  ███████╗ ██╗   ██╗',
+				'██╔══██╗ ██╔════╝ ██║   ██║',
+				'██║  ██║ █████╗   ██║   ██║',
+				'██║  ██║ ██╔══╝   ╚██╗ ██╔╝',
+				'██████╔╝ ███████╗  ╚████╔╝ ',
+				'╚═════╝  ╚══════╝   ╚═══╝  ',
+			].join('\n')),
+			$('p.happydev-tagline.description', {}, localize({ key: 'gettingStarted.editingEvolved', comment: ['Shown as subtitle on the Welcome page.'] }, "a fork of VS Code, rebuilt around a minimal Zed-style theme"))
 		);
 
 		const leftColumn = $('.categories-column.categories-column-left', {},);
