@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HappyDev</title>
+</head>
+<body>
+<style>
+  :root {
+    --bg: #0A0A0D;
+    --bg-raised: #131318;
+    --bg-inset: #08080B;
+    --border: #232430;
+    --border-soft: #1A1B22;
+    --text: #EDEDF2;
+    --text-muted: #9497A6;
+    --text-faint: #5C5F6E;
+    --cyan: #2EC4E0;
+    --blue: #2B5FAD;
+    --pink: #E63979;
+    --green: #4FB477;
+
+    --mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body { overflow-x: hidden; }
+
+  a { color: inherit; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+    background: rgba(10,10,13,0.72);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .brand-mark {
+    width: 24px; height: 24px;
+    border-radius: 7px;
+    background: var(--bg-inset);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    color: var(--cyan);
+  }
+  .navlinks {
+    display: flex;
+    gap: 28px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .navlinks a { text-decoration: none; transition: color .15s; }
+  .navlinks a:hover { color: var(--text); }
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color .15s, color .15s;
+  }
+  .nav-cta:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* ---------- hero ---------- */
+  header.hero {
+    padding: 88px 0 64px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(79,180,119,0.15);
+  }
+
+  .terminal {
+    background: var(--bg-inset);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px -30px rgba(0,0,0,0.6);
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .terminal-bar .tf { width: 10px; height: 10px; border-radius: 50%; }
+  .tf.r { background: #4a4a52; }
+  .tf.y { background: #4a4a52; }
+  .tf.g { background: #4a4a52; }
+  .terminal-bar span {
+    margin-left: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+  .hero-shell {
+    display: flex;
+  }
+  .hero-sidebar {
+    width: 42px;
+    flex-shrink: 0;
+    background: var(--bg-raised);
+    border-right: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 0;
+  }
+  @media (max-width: 640px) { .hero-sidebar { display: none; } }
+  .hs-icon { color: var(--text-faint); }
+  .hs-icon.on { color: var(--cyan); }
+  .hero-tab {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 0 0 14px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid var(--cyan);
+  }
+  .terminal-body {
+    flex: 1;
+    min-width: 0;
+    padding: 22px 26px 34px;
+  }
+  .ansi {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.28;
+    white-space: pre;
+    color: var(--cyan);
+    margin: 0 0 6px;
+    overflow-x: auto;
+  }
+  .ansi .close { color: var(--pink); }
+  @media (max-width: 640px) {
+    .ansi { font-size: 6.4px; }
+  }
+
+  .typeline {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-top: 18px;
+  }
+  .typeline .prompt { color: var(--green); }
+  .typeline .path { color: var(--blue); }
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 16px;
+    background: var(--cyan);
+    margin-left: 2px;
+    vertical-align: -3px;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-copy { margin-top: 46px; max-width: 640px; }
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(32px, 5vw, 46px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+  h1 .accent { color: var(--cyan); }
+  .lede {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 58ch;
+    margin: 0 0 34px;
+  }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 7px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    transition: transform .12s, box-shadow .12s, background .12s;
+  }
+  .btn-primary {
+    background: var(--cyan);
+    color: #06181d;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -8px rgba(46,196,224,0.5); }
+  .btn-ghost {
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover { border-color: var(--text-faint); transform: translateY(-1px); }
+  .kbd {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 3px 6px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+  .btn-ghost .kbd { background: rgba(255,255,255,0.05); }
+  .platforms {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-faint);
+    margin-top: 16px;
+  }
+
+  /* ---------- section shell ---------- */
+  section { padding: 70px 0; border-top: 1px solid var(--border-soft); }
+  .section-head { margin-bottom: 40px; max-width: 620px; }
+  .section-head .eyebrow { margin-bottom: 14px; }
+  h2 {
+    font-family: var(--mono);
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .section-head p {
+    color: var(--text-muted);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ---------- feature grid ---------- */
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) { .grid3 { grid-template-columns: 1fr; } }
+  .feature {
+    background: var(--bg-raised);
+    padding: 28px 24px;
+  }
+  .feature .fcmd {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-bottom: 14px;
+  }
+  .feature .fcmd::before { content: "$ "; color: var(--green); }
+  .feature h3 {
+    font-size: 16.5px;
+    margin: 0 0 8px;
+    font-weight: 650;
+  }
+  .feature p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* ---------- editor mock ---------- */
+  .editor-mock {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    background: #0D0D0D;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+  @media (max-width: 640px) { .editor-mock { grid-template-columns: 1fr; } }
+  .editor-side {
+    background: #0F0F0F;
+    border-right: 1px solid #1A1A1A;
+    padding: 16px 0;
+  }
+  @media (max-width: 640px) { .editor-side { display: none; } }
+  .editor-side .sec { padding: 0 16px; color: var(--text-faint); font-size: 10.5px; letter-spacing: 0.08em; margin: 14px 0 8px; }
+  .editor-side .file { padding: 5px 16px; color: var(--text-muted); cursor: pointer; user-select: none; }
+  .editor-side .file:hover { color: var(--text); }
+  .editor-side .file.active { color: var(--cyan); background: rgba(46,196,224,0.08); border-left: 2px solid var(--cyan); padding-left: 14px; }
+  .editor-main .tabs { display: flex; border-bottom: 1px solid #1A1A1A; }
+  .editor-main .tab {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 10px 10px 18px; font-size: 12px; color: var(--text-faint);
+    border-right: 1px solid #1A1A1A; cursor: pointer; user-select: none;
+  }
+  .editor-main .tab:hover { color: var(--text-muted); }
+  .editor-main .tab.on { color: var(--text); background: #0D0D0D; border-top: 2px solid var(--cyan); }
+  .editor-main .tab-close {
+    display: flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; border-radius: 4px;
+    font-size: 13px; line-height: 1; color: var(--text-faint);
+    opacity: 0; transition: opacity .12s, background .12s, color .12s;
+  }
+  .editor-main .tab:hover .tab-close { opacity: 1; }
+  .editor-main .tab-close:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+  .editor-main .tab-close.disabled { opacity: 0 !important; pointer-events: none; }
+  .editor-code { padding: 20px 22px; line-height: 1.7; }
+  .editor-code .ln { color: #3A3A3A; display: inline-block; width: 22px; user-select: none; }
+  .k { color: var(--blue); } .s { color: var(--green); } .c { color: var(--text-faint); } .f { color: var(--cyan); } .p { color: var(--pink); }
+
+  /* ---------- download ---------- */
+  .download-panel {
+    background: linear-gradient(155deg, var(--bg-raised), var(--bg-inset));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 48px;
+    text-align: center;
+  }
+  @media (max-width: 640px) { .download-panel { padding: 34px 22px; } }
+  .download-panel h2 { margin-bottom: 10px; }
+  .download-panel p { color: var(--text-muted); margin: 0 0 30px; }
+  .os-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+  /* ---------- footer ---------- */
+  footer { padding: 44px 0 60px; }
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+  .footer-col h4 {
+    color: var(--text-faint);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 8px;
+  }
+  .footer-col a:hover { color: var(--cyan); }
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-soft);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+</style>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand-mark">&lt;/&gt;</span>
+      HappyDev
+    </div>
+    <div class="navlinks">
+      <a href="#features">features</a>
+      <a href="/download">download</a>
+    </div>
+    <a class="nav-cta" href="https://github.com/furaxdev/happy-dev">GitHub ↗</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>v0.1 &middot; building in public &middot; day 1 of 30</div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="tf r"></span><span class="tf y"></span><span class="tf g"></span>
+        <span>HappyDev</span>
+      </div>
+      <div class="hero-shell">
+        <div class="hero-sidebar">
+          <span class="hs-icon on"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M9 3.5v17"/></svg></span>
+          <span class="hs-icon"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.35-4.35"/></svg></span>
+          <span class="hs-icon"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/><path d="M7 9.5v3a2 2 0 0 0 2 2h4"/></svg></span>
+        </div>
+        <div class="terminal-body">
+        <div class="hero-tab">Welcome</div>
+        <pre class="ansi">██╗  ██╗  █████╗  ██████╗  ██████╗  ██╗   ██╗
+██║  ██║ ██╔══██╗ ██╔══██╗ ██╔══██╗ ╚██╗ ██╔╝
+███████║ ███████║ ██████╔╝ ██████╔╝  ╚████╔╝
+██╔══██║ ██╔══██║ ██╔═══╝  ██╔═══╝    ╚██╔╝
+██║  ██║ ██║  ██║ ██║      ██║         ██║
+<span class="close">╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝      ╚═╝         ╚═╝</span>
+██████╗  ███████╗ ██╗   ██╗
+██╔══██╗ ██╔════╝ ██║   ██║
+██║  ██║ █████╗   ██║   ██║
+██║  ██║ ██╔══╝   ╚██╗ ██╔╝
+██████╔╝ ███████╗  ╚████╔╝
+<span class="close">╚═════╝  ╚══════╝   ╚═══╝</span></pre>
+        <div class="typeline"><span class="prompt">//</span> a fork of VS Code, rebuilt around a minimal Zed-style theme<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-copy">
+      <h1>An editor that doesn't<br>get in your <span class="accent">way</span>.</h1>
+      <p class="lede">HappyDev takes everything VS Code already does well and strips the chrome: a dark, high-contrast theme built for long sessions, on a codebase you can actually read.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/download">Download for macOS <span class="kbd">D</span></a>
+        <a class="btn btn-ghost" href="https://github.com/furaxdev/happy-dev">Clone the repo <span class="kbd">C</span></a>
+      </div>
+      <div class="platforms">macOS (Intel) available now &middot; Windows &amp; Linux planned</div>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">features/</div>
+      <h2>Familiar underneath, different on top.</h2>
+      <p>Same engine, same extension ecosystem, same keybindings you already know. What changes is what you see.</p>
+    </div>
+
+    <div class="grid3 reveal">
+      <div class="feature">
+        <div class="fcmd">theme --apply happydev-dark</div>
+        <h3>A theme built for one screen, all day</h3>
+        <p>Near-black background, a single cyan accent for focus, and just enough color in the gutter to know what changed.</p>
+      </div>
+      <div class="feature">
+        <div class="fcmd">extensions --compatible</div>
+        <h3>Every VS Code extension still works</h3>
+        <p>It's the same fork underneath, so the marketplace, the debugger and the language servers you already rely on all still work.</p>
+      </div>
+      <div class="feature">
+        <div class="fcmd">git log --oneline -1</div>
+        <h3>Open source, in public, from commit one</h3>
+        <p>Every change lands as a real commit on a public repo. No private branch, no surprise release.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">theme/happydev-dark.json</div>
+      <h2>The default theme, not a screenshot of it.</h2>
+      <p>Every color below is the actual token used in the editor: cyan for focus, blue for structure, pink kept rare on purpose.</p>
+    </div>
+
+    <div class="editor-mock reveal">
+      <div class="editor-side">
+        <div class="sec">HAPPY-DEV</div>
+        <div class="file" data-file="theme.json">theme</div>
+        <div class="file active" data-file="happydev-dark.json">happydev-dark.json</div>
+        <div class="file" data-file="package.json">package.json</div>
+        <div class="sec">SRC</div>
+        <div class="file" data-file="main.ts">main.ts</div>
+        <div class="file" data-file="editor.ts">editor.ts</div>
+        <div class="file" data-file="README.md">README.md</div>
+      </div>
+      <div class="editor-main">
+        <div class="tabs">
+          <div class="tab on" data-file="happydev-dark.json"><span class="tab-label">happydev-dark.json</span><span class="tab-close">&times;</span></div>
+          <div class="tab" data-file="README.md"><span class="tab-label">README.md</span><span class="tab-close">&times;</span></div>
+        </div>
+
+        <div class="editor-code" data-file="happydev-dark.json">
+<span class="ln">1</span><span class="k">{</span><br>
+<span class="ln">2</span>&nbsp;&nbsp;<span class="p">"name"</span><span class="c">:</span> <span class="s">"HappyDev Dark"</span><span class="c">,</span><br>
+<span class="ln">3</span>&nbsp;&nbsp;<span class="p">"colors"</span><span class="c">:</span> <span class="k">{</span><br>
+<span class="ln">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">"editor.background"</span><span class="c">:</span> <span class="s">"#0D0D0D"</span><span class="c">,</span><br>
+<span class="ln">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">"focusBorder"</span><span class="c">:</span> <span class="s">"#2EC4E0"</span><span class="c">,</span> <span class="c">// cyan</span><br>
+<span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">"button.background"</span><span class="c">:</span> <span class="s">"#2B5FAD"</span><span class="c">,</span> <span class="c">// blue</span><br>
+<span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="p">"badge.background"</span><span class="c">:</span> <span class="s">"#E63979"</span> <span class="c">// pink, rare</span><br>
+<span class="ln">8</span>&nbsp;&nbsp;<span class="k">}</span><br>
+<span class="ln">9</span><span class="k">}</span>
+        </div>
+
+        <div class="editor-code" data-file="README.md" style="display:none;">
+<span class="ln">1</span><span class="k"># HappyDev</span><br>
+<span class="ln">2</span><br>
+<span class="ln">3</span>An open-source editor, forked from VS Code.<br>
+<span class="ln">4</span><br>
+<span class="ln">5</span><span class="k">## Build</span><br>
+<span class="ln">6</span><br>
+<span class="ln">7</span><span class="s">npm install</span><br>
+<span class="ln">8</span><span class="s">npm run gulp vscode-darwin-x64</span>
+        </div>
+
+        <div class="editor-code" data-file="package.json" style="display:none;">
+<span class="ln">1</span><span class="k">{</span><br>
+<span class="ln">2</span>&nbsp;&nbsp;<span class="p">"name"</span><span class="c">:</span> <span class="s">"happydev"</span><span class="c">,</span><br>
+<span class="ln">3</span>&nbsp;&nbsp;<span class="p">"productName"</span><span class="c">:</span> <span class="s">"HappyDev"</span><span class="c">,</span><br>
+<span class="ln">4</span>&nbsp;&nbsp;<span class="p">"license"</span><span class="c">:</span> <span class="s">"MIT"</span>
+<span class="ln">5</span><span class="k">}</span>
+        </div>
+
+        <div class="editor-code" data-file="theme.json" style="display:none;">
+<span class="ln">1</span><span class="c">// see happydev-dark.json</span><br>
+<span class="ln">2</span><span class="c">// this is the folder it lives in</span>
+        </div>
+
+        <div class="editor-code" data-file="main.ts" style="display:none;">
+<span class="ln">1</span><span class="k">import</span> <span class="f">{ app }</span> <span class="k">from</span> <span class="s">'electron'</span><span class="c">;</span><br>
+<span class="ln">2</span><br>
+<span class="ln">3</span>app.<span class="f">whenReady</span>().<span class="f">then</span>(<span class="f">createEditorWindow</span>)<span class="c">;</span>
+        </div>
+
+        <div class="editor-code" data-file="editor.ts" style="display:none;">
+<span class="ln">1</span><span class="k">export function</span> <span class="f">createEditorWindow</span>() <span class="k">{</span><br>
+<span class="ln">2</span>&nbsp;&nbsp;<span class="c">// loads the workbench, applies happydev-dark.json</span><br>
+<span class="ln">3</span><span class="k">}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <div class="download-panel reveal">
+      <div class="eyebrow" style="justify-content:center;">install/</div>
+      <h2>Try it before we're done building it.</h2>
+      <p>Unsigned builds straight from CI, the same artifact the team runs locally.</p>
+      <div class="os-row">
+        <a class="btn btn-primary" id="download-cta" href="/download">Go to downloads ↓</a>
+        <a class="btn btn-ghost" href="https://github.com/furaxdev/happy-dev">Build it yourself <span class="kbd">C</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Project</h4>
+        <a href="#features">Features</a>
+        <a href="/download">Download</a>
+      </div>
+      <div class="footer-col">
+        <h4>Code</h4>
+        <a href="https://github.com/furaxdev/happy-dev">Repository</a>
+        <a href="https://github.com/furaxdev/happy-dev/actions">CI builds</a>
+        <a href="https://github.com/furaxdev/happy-dev/blob/main/LICENSE.md">License (MIT)</a>
+      </div>
+      <div class="footer-col">
+        <h4>Built on</h4>
+        <a href="https://github.com/microsoft/vscode">VS Code OSS</a>
+        <a href="https://zed.dev">Zed</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>HappyDev. MIT licensed, forked from VS Code OSS.</span>
+      <span>day 1 of 30</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  (function () {
+    var mock = document.querySelector('.editor-mock');
+    if (!mock) return;
+    var tabsBar = mock.querySelector('.tabs');
+    var sideFiles = mock.querySelectorAll('.editor-side .file');
+    var codePanes = mock.querySelectorAll('.editor-code');
+
+    function updateCloseButtons() {
+      var tabs = tabsBar.querySelectorAll('.tab');
+      tabs.forEach(function (t) {
+        var closeBtn = t.querySelector('.tab-close');
+        if (closeBtn) closeBtn.classList.toggle('disabled', tabs.length <= 1);
+      });
+    }
+
+    function wireTab(tab, name) {
+      var label = tab.querySelector('.tab-label');
+      var closeBtn = tab.querySelector('.tab-close');
+      label.addEventListener('click', function () { showFile(name); });
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeTab(tab);
+      });
+    }
+
+    function closeTab(tab) {
+      var tabs = Array.prototype.slice.call(tabsBar.querySelectorAll('.tab'));
+      if (tabs.length <= 1) return;
+      var wasActive = tab.classList.contains('on');
+      var idx = tabs.indexOf(tab);
+      tab.remove();
+      if (wasActive) {
+        var remaining = tabsBar.querySelectorAll('.tab');
+        var next = remaining[Math.max(0, idx - 1)] || remaining[0];
+        showFile(next.getAttribute('data-file'));
+      }
+      updateCloseButtons();
+    }
+
+    function showFile(name) {
+      codePanes.forEach(function (p) {
+        p.style.display = (p.getAttribute('data-file') === name) ? '' : 'none';
+      });
+      sideFiles.forEach(function (f) {
+        f.classList.toggle('active', f.getAttribute('data-file') === name);
+      });
+      var tab = tabsBar.querySelector('.tab[data-file="' + name + '"]');
+      if (!tab) {
+        tab = document.createElement('div');
+        tab.className = 'tab';
+        tab.setAttribute('data-file', name);
+        tab.innerHTML = '<span class="tab-label">' + name + '</span><span class="tab-close">&times;</span>';
+        tabsBar.appendChild(tab);
+        wireTab(tab, name);
+        updateCloseButtons();
+      }
+      tabsBar.querySelectorAll('.tab').forEach(function (t) {
+        t.classList.toggle('on', t === tab);
+      });
+    }
+
+    sideFiles.forEach(function (f) {
+      f.addEventListener('click', function () { showFile(f.getAttribute('data-file')); });
+    });
+    tabsBar.querySelectorAll('.tab').forEach(function (t) {
+      wireTab(t, t.getAttribute('data-file'));
+    });
+    updateCloseButtons();
+  })();
+
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
+
+    if (e.key === 'd' || e.key === 'D') {
+      e.preventDefault();
+      window.location.href = '/download';
+    }
+    if (e.key === 'c' || e.key === 'C') {
+      window.open('https://github.com/furaxdev/happy-dev', '_blank', 'noopener');
+    }
+  });
+</script>
+
+</body>
+</html>
