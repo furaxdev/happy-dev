@@ -50,7 +50,7 @@ export const defaultWindowTitle = (() => {
 
 	return base;
 })();
-export const defaultWindowTitleSeparator = isMacintosh ? ' \u2014 ' : ' - ';
+export const defaultWindowTitleSeparator = ' \u00b7 ';
 
 export class WindowTitle extends Disposable {
 
