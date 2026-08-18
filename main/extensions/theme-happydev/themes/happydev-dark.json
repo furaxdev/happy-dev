@@ -109,6 +109,14 @@
     "list.focusBackground": "#2B5FAD40",
     "list.highlightForeground": "#2EC4E0",
 
+    "quickInput.background": "#131313",
+    "quickInput.foreground": "#EDEDED",
+    "quickInputList.focusBackground": "#2B5FAD40",
+    "quickInputList.focusForeground": "#FFFFFF",
+    "quickInputTitle.background": "#131313",
+    "pickerGroup.foreground": "#2EC4E0",
+    "pickerGroup.border": "#1A1A1A",
+
     "scrollbarSlider.background": "#24242480",
     "scrollbarSlider.hoverBackground": "#2EC4E080",
     "scrollbarSlider.activeBackground": "#2EC4E0AA",
