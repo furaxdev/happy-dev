@@ -2,7 +2,11 @@
 	"configurationDefaults": {
 		"telemetry.telemetryLevel": "off",
 		"update.mode": "none",
-		"workbench.colorTheme": "HappyDev Dark"
+		"workbench.colorTheme": "HappyDev Dark",
+		"workbench.iconTheme": null,
+		"workbench.tree.renderIndentGuides": "none",
+		"workbench.list.smoothScrolling": true,
+		"workbench.secondarySideBar.defaultVisibility": "hidden"
 	},
 	"nameShort": "HappyDev",
 	"nameLong": "HappyDev",
