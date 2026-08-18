@@ -6,7 +6,8 @@
 		"workbench.iconTheme": null,
 		"workbench.tree.renderIndentGuides": "none",
 		"workbench.list.smoothScrolling": true,
-		"workbench.secondarySideBar.defaultVisibility": "hidden"
+		"workbench.secondarySideBar.defaultVisibility": "hidden",
+		"chat.disableAIFeatures": true
 	},
 	"nameShort": "HappyDev",
 	"nameLong": "HappyDev",
