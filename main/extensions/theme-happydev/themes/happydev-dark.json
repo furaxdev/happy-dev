@@ -109,6 +109,13 @@
     "list.focusBackground": "#2B5FAD40",
     "list.highlightForeground": "#2EC4E0",
 
+    "editorWidget.background": "#131313",
+    "editorWidget.foreground": "#EDEDED",
+    "editorWidget.border": "#1A1A1A",
+    "editor.findMatchBackground": "#E6397955",
+    "editor.findMatchHighlightBackground": "#2EC4E033",
+    "editor.findMatchBorder": "#E63979",
+
     "quickInput.background": "#131313",
     "quickInput.foreground": "#EDEDED",
     "quickInputList.focusBackground": "#2B5FAD40",
