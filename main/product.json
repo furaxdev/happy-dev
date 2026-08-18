@@ -9,7 +9,9 @@
 		"workbench.secondarySideBar.defaultVisibility": "hidden",
 		"chat.disableAIFeatures": true,
 		"editor.minimap.enabled": false,
-		"breadcrumbs.enabled": false
+		"breadcrumbs.enabled": false,
+		"workbench.preferredDarkColorTheme": "HappyDev Dark",
+		"workbench.preferredLightColorTheme": "HappyDev Light"
 	},
 	"nameShort": "HappyDev",
 	"nameLong": "HappyDev",

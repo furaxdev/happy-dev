@@ -16,11 +16,17 @@
         "label": "HappyDev Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/happydev-dark.json"
+      },
+      {
+        "id": "HappyDev Light",
+        "label": "HappyDev Light",
+        "uiTheme": "vs",
+        "path": "./themes/happydev-light.json"
       }
     ]
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/happydev/happydev.git"
+    "url": "https://github.com/furaxdev/happy-dev.git"
   }
 }
