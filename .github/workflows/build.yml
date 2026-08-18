@@ -65,6 +65,7 @@ jobs:
         env:
           npm_config_arch: x64
           npm_config_target_arch: x64
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Zip app bundle
         working-directory: .
