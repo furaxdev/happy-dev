@@ -123,6 +123,9 @@
 
     "notificationCenterHeader.background": "#0F0F0F",
     "notifications.background": "#0F0F0F",
-    "notifications.border": "#1A1A1A"
+    "notifications.border": "#1A1A1A",
+    "notificationLink.foreground": "#2EC4E0",
+    "notificationsErrorIcon.foreground": "#E63979",
+    "notificationsInfoIcon.foreground": "#2B5FAD"
   }
 }
