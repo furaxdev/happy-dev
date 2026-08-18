@@ -54,6 +54,11 @@
     "statusBar.border": "#1A1A1A",
     "statusBar.debuggingBackground": "#2B5FAD",
     "statusBar.debuggingForeground": "#FFFFFF",
+    "statusBarItem.errorBackground": "#E63979",
+    "statusBarItem.errorForeground": "#FFFFFF",
+    "statusBarItem.prominentBackground": "#151515",
+    "statusBarItem.remoteBackground": "#2EC4E0",
+    "statusBarItem.remoteForeground": "#06181D",
     "statusBar.noFolderBackground": "#0D0D0D",
 
     "editorGroup.border": "#1A1A1A",
