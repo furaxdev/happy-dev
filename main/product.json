@@ -1,4 +1,9 @@
 {
+	"configurationDefaults": {
+		"telemetry.telemetryLevel": "off",
+		"update.mode": "none",
+		"workbench.colorTheme": "HappyDev Dark"
+	},
 	"nameShort": "HappyDev",
 	"nameLong": "HappyDev",
 	"applicationName": "happydev",
