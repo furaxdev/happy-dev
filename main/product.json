@@ -7,7 +7,9 @@
 		"workbench.tree.renderIndentGuides": "none",
 		"workbench.list.smoothScrolling": true,
 		"workbench.secondarySideBar.defaultVisibility": "hidden",
-		"chat.disableAIFeatures": true
+		"chat.disableAIFeatures": true,
+		"editor.minimap.enabled": false,
+		"breadcrumbs.enabled": false
 	},
 	"nameShort": "HappyDev",
 	"nameLong": "HappyDev",
