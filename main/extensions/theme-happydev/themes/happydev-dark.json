@@ -142,6 +142,18 @@
     "textCodeBlock.background": "#151515",
     "textSeparator.foreground": "#1A1A1A",
 
+    "peekView.border": "#2B5FAD",
+    "peekViewEditor.background": "#0F0F0F",
+    "peekViewEditorGutter.background": "#0F0F0F",
+    "peekViewResult.background": "#0D0D0D",
+    "peekViewResult.selectionBackground": "#2B5FAD40",
+    "peekViewResult.selectionForeground": "#FFFFFF",
+    "peekViewTitle.background": "#131313",
+    "peekViewTitleLabel.foreground": "#D6D6D6",
+    "peekViewTitleDescription.foreground": "#8A8A8A",
+    "peekViewEditor.matchHighlightBackground": "#2EC4E033",
+    "peekViewResult.matchHighlightBackground": "#2EC4E033",
+
     "menu.background": "#0F0F0F",
     "menu.foreground": "#D6D6D6",
     "menu.selectionBackground": "#2B5FAD",
