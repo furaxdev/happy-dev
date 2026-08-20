@@ -135,6 +135,12 @@
 
     "textLink.foreground": "#2B5FAD",
     "textLink.activeForeground": "#204A8A",
+    "textPreformat.foreground": "#2B5FAD",
+    "textPreformat.background": "#F0F0F4",
+    "textBlockQuote.background": "#F3F3F6",
+    "textBlockQuote.border": "#2B5FAD",
+    "textCodeBlock.background": "#F0F0F4",
+    "textSeparator.foreground": "#E4E4EA",
 
     "menu.background": "#FFFFFF",
     "menu.foreground": "#2B2B2E",
